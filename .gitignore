@@ -12,6 +12,8 @@ mlartifacts/
 mlflow_models/
 mlruns/
 README_instructions.md
+api/RandomForestClassifier.joblib
+
 
 # Distribution / packaging
 .Python
