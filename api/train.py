@@ -92,7 +92,7 @@ def train():
 
 
     # Split the data
-    X = df[numerical_features + categorical_features]
+    X = df[numerical_features + categorical_features].drop("Returned", axis=1)
     y = df["Returned"]
 
     # Split the data into training and testing sets
@@ -115,18 +115,11 @@ def train():
     print(f"Test f1 score: {f1}")
 
 
+
     # Retrain the model on the full dataset before saving it
     print("--------------------\nRetraining the model on the full dataset...")
     rf.fit(pd.concat([X_train, X_test]), pd.concat([y_train, y_test]))
 
-    # Final evaluations
-    final_precision = precision_score(y_test, rf.predict(X_test))
-    final_recall = recall_score(y_test, rf.predict(X_test))
-    final_f1 = f1_score(y_test, rf.predict(X_test))
-
-    print(f"Final precision score: {final_precision}")
-    print(f"Final recall score: {final_recall}")
-    print(f"Final f1 score: {final_f1}")
 
     # Save the model
     artifacts = {
